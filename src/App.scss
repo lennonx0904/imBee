@@ -12,3 +12,9 @@ body {
 a {
   text-decoration: none;
 }
+
+:root {
+  --theme-tag-color: hsl(205,47%,42%);
+  --theme-tag-background-color: hsl(205,46%,92%);
+  --theme-tag-border-color: transparent;
+}
