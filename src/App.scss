@@ -1,0 +1,14 @@
+@import '~normalize.css';
+
+* {
+  font-weight: 400;
+  font-family: 'Helvetica', 'Roboto', 'Arial', 'sans-serif';
+}
+
+body {
+  min-height: 100vh;
+}
+
+a {
+  text-decoration: none;
+}
