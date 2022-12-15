@@ -1,0 +1,14 @@
+.tag {
+  color: var(--theme-tag-color);
+  background-color: var(--theme-tag-background-color);
+  border-color: var(--theme-tag-border-color);
+  padding: 4.8px 6px;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 3px;
+  font-size: 12px;
+  line-height: 12px;
+  display: inline-block;
+  margin-right: 6px;
+  margin-top: 4px;
+}
