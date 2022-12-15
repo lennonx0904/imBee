@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+/* eslint-disable no-unused-vars */
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { SearchBar, Tag } from 'components';
@@ -10,9 +11,18 @@ function HomePage() {
   const tags = useSelector((state) => state.tags);
   const dispatch = useDispatch();
 
+  const [currentTag, setCurrentTag] = useState('');
+
   useEffect(() => {
     dispatch(fetchTags());
   }, []);
+
+  useEffect(() => {
+    if (tags && tags.length > 0 && !currentTag) {
+      const firstTag = tags[0].name;
+      setCurrentTag(firstTag);
+    }
+  }, [tags]);
 
   return (
     <div>
@@ -20,7 +30,7 @@ function HomePage() {
       <div className="tag-list">
         <div>Trending</div>
         {tags.map(({ name }) => (
-          <Tag name={name} />
+          <Tag key={name} name={name} onClick={() => setCurrentTag(name)} currentTag={currentTag} />
         ))}
       </div>
     </div>

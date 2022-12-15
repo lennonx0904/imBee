@@ -1,7 +1,6 @@
 .tag {
   color: var(--theme-tag-color);
-  background-color: var(--theme-tag-background-color);
-  border-color: var(--theme-tag-border-color);
+  border-color: var(--theme-tag-background-color);
   padding: 4.8px 6px;
   border-width: 1px;
   border-style: solid;
@@ -11,4 +10,11 @@
   display: inline-block;
   margin-right: 6px;
   margin-top: 4px;
+  cursor: pointer;
+}
+
+.current-tag {
+  color: var(--theme-tag-color);
+  background-color: var(--theme-tag-background-color);
+  border-color: var(--theme-tag-border-color);
 }
