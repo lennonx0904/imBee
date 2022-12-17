@@ -3,19 +3,23 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { SearchBar, Tag, Question } from 'components';
-import { fetchTagsRequest as fetchTags } from 'store/actions';
-import { tags, questions } from 'mockData';
+import {
+  fetchTagsRequest as fetchTags,
+  fetchQuestionsRequest as fetchQuestions
+} from 'store/actions';
 import './style.scss';
 
 function HomePage() {
-  // const tags = useSelector((state) => state.tags);
+  const tags = useSelector((state) => state.tags);
+  const questions = useSelector((state) => state.questions);
+
   const dispatch = useDispatch();
 
   const [currentTag, setCurrentTag] = useState('');
 
-  // useEffect(() => {
-  //   dispatch(fetchTags());
-  // }, []);
+  useEffect(() => {
+    dispatch(fetchTags());
+  }, []);
 
   useEffect(() => {
     if (tags && tags.length > 0 && !currentTag) {
@@ -23,6 +27,10 @@ function HomePage() {
       setCurrentTag(firstTag);
     }
   }, [tags]);
+
+  useEffect(() => {
+    currentTag && dispatch(fetchQuestions(currentTag));
+  }, [currentTag]);
 
   return (
     <div>
