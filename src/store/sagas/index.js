@@ -6,7 +6,7 @@ import {
   FETCH_QUESTIONS_REQUEST, fetchQuestionsSuccess, fetchQuestionsFailure
 } from '../actions';
 
-export function* fetchTags() {
+function* fetchTags() {
   try {
     const res = yield APIs.fetchTags();
     yield put(fetchTagsSuccess(res.data.items));
@@ -15,7 +15,7 @@ export function* fetchTags() {
   }
 }
 
-export function* fetchQuestions({ payload: tagged }) {
+function* fetchQuestions({ payload: tagged }) {
   try {
     const res = yield APIs.fetchQuestions({ tagged });
     yield put(fetchQuestionsSuccess(res.data.items));

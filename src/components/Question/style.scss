@@ -16,10 +16,9 @@
 
     .detail {
       display: flex;
+      justify-content: space-around;
 
       .detail-box {
-        width: 100%;
-
         .detail-title {
           color: hsl(27, 99%, 36%);
           text-align: center;
@@ -27,6 +26,22 @@
 
         .detail-count {
           text-align: center;
+          line-height: 1;
+          padding: 2px 0;
+        }
+
+        .score-below-zero {
+          color: red;
+        }
+
+        .is-answered {
+          border: 1px solid green;
+          color: green;
+        }
+
+        .has-answer-not-accepted {
+          background-color: green;
+          color: white;
         }
       }
     }

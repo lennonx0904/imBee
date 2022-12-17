@@ -42,7 +42,7 @@ function HomePage() {
         ))}
       </div>
       <div className="question-list">
-        {questions.map((item) => (<Question key={item.question_id} item={item} />))}
+        {questions.map((question) => (<Question key={question.question_id} question={question} />))}
       </div>
     </div>
   );
