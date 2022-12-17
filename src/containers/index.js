@@ -2,20 +2,20 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { SearchBar, Tag } from 'components';
+import { SearchBar, Tag, Question } from 'components';
 import { fetchTagsRequest as fetchTags } from 'store/actions';
-
+import { tags, questions } from 'mockData';
 import './style.scss';
 
 function HomePage() {
-  const tags = useSelector((state) => state.tags);
+  // const tags = useSelector((state) => state.tags);
   const dispatch = useDispatch();
 
   const [currentTag, setCurrentTag] = useState('');
 
-  useEffect(() => {
-    dispatch(fetchTags());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(fetchTags());
+  // }, []);
 
   useEffect(() => {
     if (tags && tags.length > 0 && !currentTag) {
@@ -32,6 +32,9 @@ function HomePage() {
         {tags.map(({ name }) => (
           <Tag key={name} name={name} onClick={() => setCurrentTag(name)} currentTag={currentTag} />
         ))}
+      </div>
+      <div className="question-list">
+        {questions.map((item) => (<Question key={item.question_id} item={item} />))}
       </div>
     </div>
   );
