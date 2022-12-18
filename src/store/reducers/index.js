@@ -4,12 +4,14 @@ import {
   FETCH_TAGS_FAILURE,
   FETCH_QUESTIONS_REQUEST,
   FETCH_QUESTIONS_SUCCESS,
-  FETCH_QUESTIONS_FAILURE
+  FETCH_QUESTIONS_FAILURE,
+  ADD_QUESTIONS
 } from '../actions';
 
 const initState = {
   tags: [],
   questions: [],
+  hasMoreQuestions: false,
   isFetching: false,
   error: ''
 };
@@ -44,7 +46,8 @@ const reducer = (state = initState, action) => {
     case FETCH_QUESTIONS_SUCCESS:
       return {
         ...state,
-        questions: action.payload,
+        questions: action.payload.items,
+        hasMoreQuestions: action.payload.has_more,
         isFetching: false,
         error: ''
       };
@@ -53,6 +56,14 @@ const reducer = (state = initState, action) => {
         ...state,
         isFetching: false,
         error: action.payload
+      };
+    case ADD_QUESTIONS:
+      return {
+        ...state,
+        questions: [...state.questions, ...action.payload.items],
+        hasMoreQuestions: action.payload.has_more,
+        isFetching: false,
+        error: ''
       };
     default:
       return { ...state };
