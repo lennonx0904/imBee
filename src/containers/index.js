@@ -70,11 +70,13 @@ function HomePage() {
     dispatch(setQuestions([]));
   };
 
-  useDebounce(() => {
+  const [isReady] = useDebounce(() => {
     searchText && dispatch(fetchQuestions({ tagged: searchText, page: 1 }));
   },
   500,
   [searchText]);
+
+  const debounceIsReady = isReady();
 
   return (
     <div className="homepage-comtainer">
@@ -89,7 +91,7 @@ function HomePage() {
         {questions.map((question) => (
           <Question key={question.question_id} question={question} />
         ))}
-        {isFetching && <Spinner />}
+        {(isFetching || !debounceIsReady) && <Spinner />}
       </div>
     </div>
   );
