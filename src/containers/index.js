@@ -8,7 +8,8 @@ import {
 } from 'components';
 import {
   fetchTagsRequest as fetchTags,
-  fetchQuestionsRequest as fetchQuestions
+  fetchQuestionsRequest as fetchQuestions,
+  setQuestions
 } from 'store/actions';
 import './style.scss';
 
@@ -66,6 +67,7 @@ function HomePage() {
     setCurrentTag(tag);
     setPage(1);
     setSearchText('');
+    dispatch(setQuestions([]));
   };
 
   useDebounce(() => {

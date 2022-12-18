@@ -21,6 +21,7 @@ export const FETCH_QUESTIONS_REQUEST = 'FETCH_QUESTIONS_REQUEST';
 export const FETCH_QUESTIONS_SUCCESS = 'FETCH_QUESTIONS_SUCCESS';
 export const FETCH_QUESTIONS_FAILURE = 'FETCH_QUESTIONS_FAILURE';
 export const ADD_QUESTIONS = 'ADD_QUESTIONS';
+export const SET_QUESTIONS = 'SET_QUESTIONS';
 
 export const fetchQuestionsRequest = (payload) => ({
   type: FETCH_QUESTIONS_REQUEST,
@@ -39,5 +40,10 @@ export const fetchQuestionsFailure = (payload) => ({
 
 export const addQuestions = (payload) => ({
   type: ADD_QUESTIONS,
+  payload
+});
+
+export const setQuestions = (payload) => ({
+  type: SET_QUESTIONS,
   payload
 });

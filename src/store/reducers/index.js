@@ -5,7 +5,8 @@ import {
   FETCH_QUESTIONS_REQUEST,
   FETCH_QUESTIONS_SUCCESS,
   FETCH_QUESTIONS_FAILURE,
-  ADD_QUESTIONS
+  ADD_QUESTIONS,
+  SET_QUESTIONS
 } from '../actions';
 
 const initState = {
@@ -62,6 +63,13 @@ const reducer = (state = initState, action) => {
         ...state,
         questions: [...state.questions, ...action.payload.items],
         hasMoreQuestions: action.payload.has_more,
+        isFetching: false,
+        error: ''
+      };
+    case SET_QUESTIONS:
+      return {
+        ...state,
+        questions: action.payload,
         isFetching: false,
         error: ''
       };

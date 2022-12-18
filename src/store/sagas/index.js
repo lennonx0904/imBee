@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { put, all, takeEvery } from 'redux-saga/effects';
 import APIs from 'api';
 import {
