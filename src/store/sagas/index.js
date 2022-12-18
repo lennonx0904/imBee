@@ -21,7 +21,7 @@ function* fetchTags() {
 }
 
 function* fetchQuestions({ payload }) {
-  const { currentTag: tagged, page } = payload;
+  const { tagged, page } = payload;
 
   try {
     const res = yield APIs.fetchQuestions({ tagged, page });

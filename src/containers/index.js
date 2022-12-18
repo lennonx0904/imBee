@@ -1,8 +1,11 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useDebounce } from 'react-use';
 
-import { SearchBar, Tag, Question } from 'components';
+import {
+  SearchBar, Tag, Question, Spinner
+} from 'components';
 import {
   fetchTagsRequest as fetchTags,
   fetchQuestionsRequest as fetchQuestions
@@ -20,10 +23,11 @@ function HomePage() {
   const [currentTag, setCurrentTag] = useState('');
   const [page, setPage] = useState(0);
   const [scrollPosition, setScrollPosition] = useState(0);
+  const [searchText, setSearchText] = useState('');
 
   const fetchNextPage = () => {
     setPage(page + 1);
-    dispatch(fetchQuestions({ currentTag, page: page + 1 }));
+    dispatch(fetchQuestions({ tagged: searchText || currentTag, page: page + 1 }));
   };
 
   window.addEventListener('scroll', () => {
@@ -45,7 +49,7 @@ function HomePage() {
   }, [tags]);
 
   useEffect(() => {
-    currentTag && dispatch(fetchQuestions({ currentTag, page }));
+    currentTag && dispatch(fetchQuestions({ tagged: currentTag, page }));
   }, [currentTag]);
 
   useEffect(() => {
@@ -58,25 +62,32 @@ function HomePage() {
     }
   }, [scrollPosition]);
 
+  const onTagClick = (tag) => {
+    setCurrentTag(tag);
+    setPage(1);
+    setSearchText('');
+  };
+
+  useDebounce(() => {
+    searchText && dispatch(fetchQuestions({ tagged: searchText, page: 1 }));
+  },
+  500,
+  [searchText]);
+
   return (
     <div>
-      <SearchBar />
+      <SearchBar text={searchText} onChange={setSearchText} />
       <div className="tag-list">
         <div>Trending</div>
         {tags.map(({ name }) => (
-          <Tag
-            key={name}
-            name={name}
-            onClick={() => { setCurrentTag(name); setPage(1); }}
-            currentTag={currentTag}
-          />
+          <Tag key={name} name={name} onClick={() => onTagClick(name)} currentTag={currentTag} />
         ))}
       </div>
       <div className="question-list">
         {questions.map((question) => (
           <Question key={question.question_id} question={question} />
         ))}
-        {isFetching && <h4>LOADING...</h4>}
+        {isFetching && <Spinner />}
       </div>
     </div>
   );
