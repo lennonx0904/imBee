@@ -67,7 +67,7 @@ function HomePage() {
           <Tag
             key={name}
             name={name}
-            onClick={() => setCurrentTag(name)}
+            onClick={() => { setCurrentTag(name); setPage(1); }}
             currentTag={currentTag}
           />
         ))}
