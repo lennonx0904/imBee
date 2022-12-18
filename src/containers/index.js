@@ -77,7 +77,7 @@ function HomePage() {
   [searchText]);
 
   return (
-    <div>
+    <div className="homepage-comtainer">
       <SearchBar text={searchText} onChange={setSearchText} />
       <div className="tag-list">
         <div>Trending</div>
